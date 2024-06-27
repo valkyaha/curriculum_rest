@@ -1,5 +1,5 @@
 package com.kittyvt.restapi.domain.dto;
 
-public record AboutMeDTO(String title,String desc,String language) {
+public record AboutMeRecord(Long id, String title, String description, String language) {
 
 }

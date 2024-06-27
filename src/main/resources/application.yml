@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: restapi
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    password: root
+    username: root
+    url: "jdbc:postgresql://localhost:5432/default_database"
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+  data:
+    jdbc:
+      dialect: postgresql
