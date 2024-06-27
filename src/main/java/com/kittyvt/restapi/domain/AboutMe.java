@@ -11,13 +11,11 @@ import lombok.NoArgsConstructor;
 public class AboutMe {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @Column(name = "language")
+    private String language;
     @Column(name = "title")
     private String title;
     @Column(name = "description")
     private String description;
-    @Column(name = "language")
-    private String language;
 }
 
