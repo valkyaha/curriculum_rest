@@ -24,13 +24,13 @@ public class AboutMeServiceImpl implements AboutMeService {
     }
 
     @Override
-    public void postAboutMe(AboutMeDTO record) {
-        aboutMeDAO.save(record);
+    public void postAboutMe(AboutMeDTO aboutMeDTO) {
+        aboutMeDAO.save(aboutMeDTO);
     }
 
     @Override
-    public void deleteAboutMe(AboutMeDTO record) {
-        aboutMeDAO.delete(record);
+    public void deleteAboutMe(AboutMeDTO aboutMeDTO) {
+        aboutMeDAO.delete(aboutMeDTO);
     }
 
     @Override

@@ -8,7 +8,6 @@ import com.kittyvt.restapi.repository.AboutMeRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -24,11 +23,6 @@ public class AboutMeDAO implements DAO<AboutMeDTO> {
     @Override
     public Optional<AboutMeDTO> get(String language) {
         return aboutMeRepository.findByLanguage(language).map(AboutMeMapper.INSTANCE::toRecord);
-    }
-
-    @Override
-    public List<AboutMeDTO> getAll(String language) {
-        return List.of();
     }
 
     @Override

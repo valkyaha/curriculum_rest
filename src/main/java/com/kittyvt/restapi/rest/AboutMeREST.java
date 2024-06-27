@@ -12,6 +12,7 @@ import java.util.Optional;
 @RestController
 public class AboutMeREST {
 
+    public static final String TODO_OK = "Todo ok";
     private final AboutMeService aboutMeService;
 
     public AboutMeREST(AboutMeService aboutMeService) {
@@ -22,38 +23,63 @@ public class AboutMeREST {
     public ResponseEntity<Object> getAbout(@PathVariable String lang) {
 
         try {
-            Optional<AboutMeDTO> record = aboutMeService.getAboutMe(lang);
-            if (record.isPresent()) {
-                return new ResponseEntityBuilderResponse<>().setStatus(HttpStatus.OK).setResponse(record).setMessage("Todo ok").build();
+            Optional<AboutMeDTO> aboutMeRecord = aboutMeService.getAboutMe(lang);
+            if (aboutMeRecord.isPresent()) {
+                return new ResponseEntityBuilderResponse<>()
+                        .setStatus(HttpStatus.OK)
+                        .setResponse(aboutMeRecord)
+                        .setMessage("Get the about me data")
+                        .build();
             } else {
-                return new ResponseEntityBuilderResponse<>().setStatus(HttpStatus.BAD_REQUEST).setError("No hay").setMessage("Todo ok").build();
+                return new ResponseEntityBuilderResponse<>()
+                        .setStatus(HttpStatus.BAD_REQUEST)
+                        .setError("No hay")
+                        .setMessage(HttpStatus.OK.getReasonPhrase())
+                        .build();
             }
         } catch (Exception e) {
-            return new ResponseEntityBuilderResponse<>().setStatus(HttpStatus.INTERNAL_SERVER_ERROR).setError("Peto el server").setMessage("Todo ok").build();
+            return new ResponseEntityBuilderResponse<>()
+                    .setStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .setError(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
+                    .setMessage("Server encountered an error")
+                    .build();
         }
     }
 
     @PostMapping("/about")
-    public ResponseEntity<Object> postAbout(@RequestBody AboutMeDTO record) {
+    public ResponseEntity<Object> postAbout(@RequestBody AboutMeDTO aboutMeDTO) {
 
         try {
-            aboutMeService.postAboutMe(record);
-
-            return new ResponseEntityBuilderResponse<>().setStatus(HttpStatus.OK).setMessage("Todo ok").build();
+            aboutMeService.postAboutMe(aboutMeDTO);
+            return new ResponseEntityBuilderResponse<>()
+                    .setStatus(HttpStatus.OK)
+                    .setMessage(TODO_OK)
+                    .build();
         } catch (Exception e) {
-            return new ResponseEntityBuilderResponse<>().setStatus(HttpStatus.INTERNAL_SERVER_ERROR).setError("Peto el server").setMessage("Todo ok").build();
+            return new ResponseEntityBuilderResponse<>()
+                    .setStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .setError("Error server")
+                    .setMessage(TODO_OK)
+                    .build();
         }
     }
 
     @DeleteMapping("/about")
-    public ResponseEntity<Object> deleteAbout(@RequestBody AboutMeDTO record) {
+    public ResponseEntity<Object> deleteAbout(@RequestBody AboutMeDTO aboutMeDTO) {
 
         try {
-            aboutMeService.deleteAboutMe(record);
+            aboutMeService.deleteAboutMe(aboutMeDTO);
 
-            return new ResponseEntityBuilderResponse<>().setStatus(HttpStatus.OK).setMessage("Todo ok").build();
+            return new ResponseEntityBuilderResponse<>()
+                    .setStatus(HttpStatus.OK)
+                    .setMessage(TODO_OK)
+                    .build();
         } catch (Exception e) {
-            return new ResponseEntityBuilderResponse<>().setStatus(HttpStatus.INTERNAL_SERVER_ERROR).setError("Peto el server").setMessage("Todo ok").build();
+            return new ResponseEntityBuilderResponse<>()
+                    .setStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .setError(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
+                    .setMessage(TODO_OK)
+                    .build();
         }
     }
 
@@ -62,9 +88,17 @@ public class AboutMeREST {
 
         try {
             aboutMeService.putAboutMe(lang, aboutMeDTO);
-            return new ResponseEntityBuilderResponse<>().setStatus(HttpStatus.OK).setResponse("done").setMessage("Todo ok").build();
+            return new ResponseEntityBuilderResponse<>()
+                    .setStatus(HttpStatus.OK)
+                    .setResponse("done")
+                    .setMessage(TODO_OK)
+                    .build();
         } catch (Exception e) {
-            return new ResponseEntityBuilderResponse<>().setStatus(HttpStatus.INTERNAL_SERVER_ERROR).setError("Peto el server").setMessage("Todo ok").build();
+            return new ResponseEntityBuilderResponse<>()
+                    .setStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .setError(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
+                    .setMessage(TODO_OK)
+                    .build();
         }
     }
 }
