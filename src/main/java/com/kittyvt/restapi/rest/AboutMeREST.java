@@ -1,6 +1,6 @@
 package com.kittyvt.restapi.rest;
 
-import com.kittyvt.restapi.domain.dto.AboutMeDTO;
+import com.kittyvt.restapi.domain.dto.AboutMeDto;
 import com.kittyvt.restapi.service.services.AboutMeService;
 import com.kittyvt.restapi.utils.ResponseEntityBuilderResponse;
 import org.springframework.http.HttpStatus;
@@ -23,7 +23,7 @@ public class AboutMeREST {
     public ResponseEntity<Object> getAbout(@PathVariable String lang) {
 
         try {
-            Optional<AboutMeDTO> aboutMeRecord = aboutMeService.getAboutMe(lang);
+            Optional<AboutMeDto> aboutMeRecord = aboutMeService.getAboutMe(lang);
             if (aboutMeRecord.isPresent()) {
                 return new ResponseEntityBuilderResponse<>()
                         .setStatus(HttpStatus.OK)
@@ -47,7 +47,7 @@ public class AboutMeREST {
     }
 
     @PostMapping("/about")
-    public ResponseEntity<Object> postAbout(@RequestBody AboutMeDTO aboutMeDTO) {
+    public ResponseEntity<Object> postAbout(@RequestBody AboutMeDto aboutMeDTO) {
 
         try {
             aboutMeService.postAboutMe(aboutMeDTO);
@@ -65,7 +65,7 @@ public class AboutMeREST {
     }
 
     @DeleteMapping("/about")
-    public ResponseEntity<Object> deleteAbout(@RequestBody AboutMeDTO aboutMeDTO) {
+    public ResponseEntity<Object> deleteAbout(@RequestBody AboutMeDto aboutMeDTO) {
 
         try {
             aboutMeService.deleteAboutMe(aboutMeDTO);
@@ -84,7 +84,7 @@ public class AboutMeREST {
     }
 
     @PutMapping("/about/{lang}")
-    public ResponseEntity<Object> getAbout(@PathVariable String lang, @RequestBody AboutMeDTO aboutMeDTO) {
+    public ResponseEntity<Object> getAbout(@PathVariable String lang, @RequestBody AboutMeDto aboutMeDTO) {
 
         try {
             aboutMeService.putAboutMe(lang, aboutMeDTO);

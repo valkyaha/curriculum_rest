@@ -2,7 +2,7 @@ package com.kittyvt.restapi.domain.dao.impl;
 
 import com.kittyvt.restapi.domain.AboutMe;
 import com.kittyvt.restapi.domain.dao.DAO;
-import com.kittyvt.restapi.domain.dto.AboutMeDTO;
+import com.kittyvt.restapi.domain.dto.AboutMeDto;
 import com.kittyvt.restapi.domain.mapper.AboutMeMapper;
 import com.kittyvt.restapi.repository.AboutMeRepository;
 import org.springframework.stereotype.Component;
@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Component
 @Service
-public class AboutMeDAO implements DAO<AboutMeDTO> {
+public class AboutMeDAO implements DAO<AboutMeDto> {
 
     private final AboutMeRepository aboutMeRepository;
 
@@ -21,27 +21,23 @@ public class AboutMeDAO implements DAO<AboutMeDTO> {
     }
 
     @Override
-    public Optional<AboutMeDTO> get(String language) {
+    public Optional<AboutMeDto> get(String language) {
         return aboutMeRepository.findByLanguage(language).map(AboutMeMapper.INSTANCE::toRecord);
     }
 
     @Override
-    public void save(AboutMeDTO aboutMeDTO) {
+    public void save(AboutMeDto aboutMeDTO) {
         aboutMeRepository.save(AboutMeMapper.INSTANCE.toEntity(aboutMeDTO));
     }
 
     @Override
-    public void update(String lang, AboutMeDTO after) {
+    public void update(String lang, AboutMeDto after) {
         Optional<AboutMe> before = aboutMeRepository.findByLanguage(lang);
-        before.ifPresent(update -> {
-            update.setDescription(after.getDescription());
-            update.setTitle(after.getTitle());
-            aboutMeRepository.save(update);
-        });
+        before.ifPresent(update -> aboutMeRepository.save(AboutMeMapper.INSTANCE.partialUpdate(after, update)));
     }
 
     @Override
-    public void delete(AboutMeDTO aboutMeDTO) {
+    public void delete(AboutMeDto aboutMeDTO) {
         aboutMeRepository.delete(AboutMeMapper.INSTANCE.toEntity(aboutMeDTO));
     }
 }

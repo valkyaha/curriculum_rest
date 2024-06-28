@@ -1,16 +1,16 @@
 package com.kittyvt.restapi.service.services;
 
-import com.kittyvt.restapi.domain.dto.AboutMeDTO;
+import com.kittyvt.restapi.domain.dto.AboutMeDto;
 import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.Optional;
 
 public interface AboutMeService {
-    Optional<AboutMeDTO> getAboutMe(final String language);
+    Optional<AboutMeDto> getAboutMe(final String language);
 
-    void postAboutMe(AboutMeDTO lang);
+    void postAboutMe(AboutMeDto lang);
 
-    void deleteAboutMe(AboutMeDTO aboutMeDTO);
+    void deleteAboutMe(AboutMeDto aboutMeDTO);
 
-    void putAboutMe(String language, AboutMeDTO aboutMeDTO) throws HttpClientErrorException.NotFound;
+    void putAboutMe(String language, AboutMeDto aboutMeDTO) throws HttpClientErrorException.NotFound;
 }

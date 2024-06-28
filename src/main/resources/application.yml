@@ -13,3 +13,6 @@ spring:
   data:
     jdbc:
       dialect: postgresql
+logging:
+  level:
+    root: debug

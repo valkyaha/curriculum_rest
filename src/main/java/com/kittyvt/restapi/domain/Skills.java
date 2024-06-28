@@ -1,27 +1,29 @@
 package com.kittyvt.restapi.domain;
 
 import jakarta.persistence.*;
-
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Setter
 @Getter
+@Setter
 @Entity
-@NoArgsConstructor
-@Table(name = "about_me")
-public class AboutMe {
-
+@Table(name = "skills")
+public class Skills {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
+
+    @Column
+    private String skillName;
+
+    @Column
+    private String description;
+
     @Column
     private String language;
-    @Column(name = "title")
-    private String title;
-    @Column(name = "description")
-    private String description;
-}
 
+    @ManyToOne
+    @JoinColumn(name = "work_experience_id")
+    private WorkExperience workExperience;
+}

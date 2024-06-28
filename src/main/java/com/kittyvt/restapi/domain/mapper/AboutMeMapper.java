@@ -1,26 +1,18 @@
 package com.kittyvt.restapi.domain.mapper;
 
 import com.kittyvt.restapi.domain.AboutMe;
-import com.kittyvt.restapi.domain.dto.AboutMeDTO;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import com.kittyvt.restapi.domain.dto.AboutMeDto;
+import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface AboutMeMapper {
-
     AboutMeMapper INSTANCE = Mappers.getMapper(AboutMeMapper.class);
 
+    AboutMeDto toRecord(AboutMe aboutMe);
 
-    @Mapping(target = "language", source = "language")
-    @Mapping(target = "title", source = "title")
-    @Mapping(target = "description", source = "description")
-    AboutMeDTO toRecord(AboutMe aboutMe);
+    AboutMe toEntity(AboutMeDto aboutMeDto);
 
-
-    @Mapping(target = "language", source = "language")
-    @Mapping(target = "title", source = "title")
-    @Mapping(target = "description", source = "description")
-    AboutMe toEntity(AboutMeDTO aboutMeDTO);
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    AboutMe partialUpdate(AboutMeDto aboutMeDto, @MappingTarget AboutMe aboutMe);
 }
-
